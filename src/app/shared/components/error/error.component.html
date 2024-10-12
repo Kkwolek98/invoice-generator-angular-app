@@ -1,0 +1,5 @@
+<div>
+  @if (ngControl.control?.touched) { @for (error of getErrorMessages(); track $index) {
+  {{ error }}
+  } }
+</div>

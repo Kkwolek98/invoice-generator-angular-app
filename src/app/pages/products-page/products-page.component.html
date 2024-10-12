@@ -1,0 +1,35 @@
+<form [formGroup]="productsForm" (ngSubmit)="submitForm()">
+  <button type="button" (click)="addNewProduct()">Add Product</button>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Count</th>
+      <th>Price</th>
+      <th></th>
+    </thead>
+    <tbody formArrayName="products">
+      <!-- @for (item of productsFormArray.controls; let i = $index; track $index) { -->
+      <!-- Apparently there is a bug with new control flow syntax and formArray :) -->
+      <tr [formGroupName]="i" *ngFor="let item of productsFormArray.controls; let i = index">
+        <td>
+          <input formControlName="name" />
+          <app-error formControlName="name" />
+        </td>
+        <td>
+          <input formControlName="count" type="number" min="1" step="1" inputmode="numeric" />
+          <app-error formControlName="count" />
+        </td>
+        <td>
+          <input formControlName="price" type="number" min="1" step="1" inputmode="numeric" />
+          <app-error formControlName="price" />
+        </td>
+        <td>
+          <button (click)="removeProductAt(i)">Remove</button>
+        </td>
+      </tr>
+      <!-- } -->
+    </tbody>
+  </table>
+
+  <button type="submit">SUBMIT</button>
+</form>
